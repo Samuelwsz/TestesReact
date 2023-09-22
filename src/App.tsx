@@ -1,14 +1,13 @@
 import "./styles/global.css"
-
-import aviao from "../public/assets/aviao.png"
-
 import Header from "./components/header"
 import GameStart from "./components/gameStart"
+import Draw from "./components/draw"
 
 function App() {
   return (
     <>
       <Header />
+      <Draw />
       <GameStart />
     </>
   )

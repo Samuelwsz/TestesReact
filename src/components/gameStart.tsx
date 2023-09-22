@@ -19,7 +19,7 @@ export default function GameStart() {
                 <input
                   type="text"
                   placeholder="Insira os nomes dos participantes"
-                  className="p-2 pl-12 rounded-l-full w-48 md:w-64 lg:w-96 outline-none border  border-b-4 border-black"
+                  className="p-2 pl-12 rounded-l-full w-80 md:w-96 lg:w-96 outline-none border  border-b-4 border-black"
                 />
                 <button
                   type="submit"

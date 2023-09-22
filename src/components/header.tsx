@@ -5,7 +5,7 @@ import participante from "../../public/assets/participante.png"
 export default function Header() {
   return (
     <>
-      <div className="bg-blue-500 pt-14">
+      <div className="bg-blue-500 pt-12">
         <div className="flex gap-3 justify-center flex-col items-center md:flex-row md:items-center">
           {/* Imagem 1 (para telas maiores que md) */}
           <img src={logo} alt="" className="w-96 h-40 md:block hidden" />

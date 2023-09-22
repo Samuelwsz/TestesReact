@@ -1,13 +1,14 @@
 import "./styles/global.css"
 import Header from "./components/header"
 import GameStart from "./components/gameStart"
-import Draw from "./components/draw"
+import { RouterProvider } from "react-router-dom"
+import { router } from "./routes/routes"
 
 function App() {
   return (
     <>
       <Header />
-      <Draw />
+
       <GameStart />
     </>
   )

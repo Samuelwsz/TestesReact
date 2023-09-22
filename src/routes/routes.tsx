@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import App from "../App"
 import Draw from "../components/draw"
+import GameStart from "../components/gameStart"
 
 export const router = createBrowserRouter([
   {
@@ -8,13 +9,13 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: "/",
+        element: <GameStart />,
+      },
+      {
         path: "/sorteio",
         element: <Draw />,
       },
     ],
-  },
-  {
-    path: "/a",
-    element: <Draw />,
   },
 ])

@@ -1,15 +1,12 @@
 import "./styles/global.css"
 import Header from "./components/header"
-import GameStart from "./components/gameStart"
-import { RouterProvider } from "react-router-dom"
-import { router } from "./routes/routes"
+import { Outlet } from "react-router-dom"
 
 function App() {
   return (
     <>
       <Header />
-
-      <GameStart />
+      <Outlet />
     </>
   )
 }

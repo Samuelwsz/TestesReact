@@ -1,18 +1,30 @@
 import { PlayCircleIcon, UserPlusIcon } from "@heroicons/react/20/solid"
 import sacola from "../../public/assets/sacolas.png"
 import { Link } from "react-router-dom"
+import { FormEvent, useState } from "react"
 
 export default function GameStart() {
+  const [name, setName] = useState<string>("")
+  const [nameList, setNameList] = useState<string[]>([])
+
+  const handleAddName = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (name && !nameList.includes(name)) {
+      setNameList([...nameList, name])
+      setName("")
+    }
+  }
+
   return (
     <>
-      <div className="bg-orange-100 flex flex-col pb-32">
+      <div className="bg-orange-100 flex flex-col pb-48">
         <div>
           <h1 className="text-blue-500 font-bold text-3xl text-center pt-10">
             Vamos começar!
           </h1>
 
           <div className="flex justify-center pt-10">
-            <form className="flex">
+            <form className="flex" onSubmit={handleAddName}>
               <div className="relative flex items-stretch w-full ">
                 <span className="flex items-center justify-center absolute inset-y-0 left-0 pl-6">
                   <UserPlusIcon className="w-5 h-5 text-gray-400 " />
@@ -20,6 +32,8 @@ export default function GameStart() {
                 <input
                   type="text"
                   placeholder="Insira os nomes dos participantes"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="p-2 pl-12 rounded-l-full w-80 md:w-96 lg:w-96 outline-none border  border-b-4 border-black"
                 />
                 <button
@@ -32,6 +46,14 @@ export default function GameStart() {
             </form>
           </div>
 
+          <div className="pt-10 text-center font-semibold">
+            <ul>
+              {nameList.map((n, index) => (
+                <li key={index}>{n}</li>
+              ))}
+            </ul>
+          </div>
+
           <Link to="/sorteio">
             <div className="flex gap-16 justify-center flex-col items-center md:flex-row md:items-center mt-20">
               <button className="flex bg-orange-500 p-4 pl-10 pr-12 rounded-full text-white font-bold text-lg border border-r-4 border-b-4 border-black">
@@ -41,7 +63,6 @@ export default function GameStart() {
               <img src={sacola} alt="" className="w-40 h-32" />
             </div>
           </Link>
-
         </div>
       </div>
     </>

@@ -1,5 +1,5 @@
 import { Squares2X2Icon } from "@heroicons/react/20/solid"
-import aviao from "../../public/assets/aviao.png"
+import aviao from "/assets/aviao.png"
 
 export default function Draw() {
   return (

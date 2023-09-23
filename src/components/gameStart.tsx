@@ -1,5 +1,5 @@
 import { PlayCircleIcon, UserPlusIcon } from "@heroicons/react/20/solid"
-import sacola from "../../public/assets/sacolas.png"
+import sacola from "/assets/sacolas.png"
 import { Link } from "react-router-dom"
 import { FormEvent, useState } from "react"
 

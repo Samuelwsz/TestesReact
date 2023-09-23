@@ -1,6 +1,6 @@
-import logocel from "../../public/assets/logo-pequeno.png"
-import logo from "../../public/assets/logo.png"
-import participante from "../../public/assets/participante.png"
+import logocel from "/assets/logopequeno.png"
+import logo from "/assets/logo.png"
+import participante from "/assets/participante.png"
 
 export default function Header() {
   return (

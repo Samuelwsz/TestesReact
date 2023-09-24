@@ -1,17 +1,20 @@
 import { PlayCircleIcon, UserPlusIcon } from "@heroicons/react/20/solid"
 import sacola from "/assets/sacolas.png"
-import { FormEvent, useState } from "react"
+import { FormEvent, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
 export default function GameStart() {
   const [name, setName] = useState<string>("")
   const [nameList, setNameList] = useState<string[]>([])
 
+  const inputRef = useRef<HTMLInputElement>(null)
+
   const handleAddName = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (name && !nameList.includes(name)) {
       setNameList([...nameList, name])
       setName("")
+      inputRef.current?.focus()
     }
   }
 
@@ -30,6 +33,7 @@ export default function GameStart() {
                   <UserPlusIcon className="w-5 h-5 text-gray-400 " />
                 </span>
                 <input
+                  ref={inputRef}
                   type="text"
                   placeholder="Insira os nomes dos participantes"
                   value={name}
@@ -37,6 +41,7 @@ export default function GameStart() {
                   className="p-2 pl-12 rounded-l-full w-80 md:w-96 lg:w-96 outline-none border  border-b-4 border-black"
                 />
                 <button
+                  disabled={!name}
                   type="submit"
                   className="bg-gray-400 text-black p-2 rounded-r-full pl-5 pr-5 text-sm font-semibold border border-b-4 border-r-4 border-black"
                 >

@@ -16,9 +16,7 @@ export default function Draw() {
                 name=""
                 id=""
                 className="p-3 rounded-full w-48 md:w-96 lg:w-96 outline-none mb-3 border border-r-4 border-b-4 border-black "
-              >
-               
-              </select>
+              ></select>
               <p className="pt-3 font-semibold text-xl">
                 Clique em em sortear para ver quem é seu amigo secreto!
               </p>

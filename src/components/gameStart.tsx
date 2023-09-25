@@ -2,6 +2,7 @@ import { PlayCircleIcon, UserPlusIcon } from "@heroicons/react/20/solid"
 import sacola from "/assets/sacolas.png"
 import { FormEvent, useRef, useState } from "react"
 import { Link } from "react-router-dom"
+import NameList from "./nameList"
 
 export default function GameStart() {
   const [name, setName] = useState<string>("")
@@ -15,9 +16,11 @@ export default function GameStart() {
     {
       if (name && !nameList.includes(name)) {
         setNameList([...nameList, name])
-        setError("")
       } else {
         setError("Nome já existe!") // Define o erro apenas se o nome já existe na lista
+        setTimeout(() => {
+          setError("")
+        }, 3000)
       }
     }
     setName("")
@@ -60,11 +63,12 @@ export default function GameStart() {
 
           <div className="pt-10 text-center font-semibold">
             {error && <p role="alert">{error}</p>}
-            <ul>
-              {nameList.map((n, index) => (
-                <li key={index}>{n}</li>
+            <NameList nameList={nameList} />
+            {/* <ul>
+              {nameList.map((n) => (
+                <li key={n}>{n}</li>
               ))}
-            </ul>
+            </ul>*/}
           </div>
 
           <Link to="/sorteio">

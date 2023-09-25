@@ -1,125 +1,138 @@
-import { fireEvent, render, screen } from "@testing-library/react"
+import { act, fireEvent, render, screen } from "@testing-library/react"
 import GameStart from "./gameStart"
 import { BrowserRouter } from "react-router-dom"
-import { error } from "console"
 
-//teste 1
-test("quando o input está vazio, novos participantes não podem ser adicionados", () => {
-  render(
-    <BrowserRouter>
-      <GameStart />
-    </BrowserRouter>
-  )
+describe("comportamento do formulario", () => {
+  //teste 1
+  test("quando o input está vazio, novos participantes não podem ser adicionados", () => {
+    render(
+      <BrowserRouter>
+        <GameStart />
+      </BrowserRouter>
+    )
 
-  const input = screen.getByPlaceholderText("Insira os nomes dos participantes")
+    const input = screen.getByPlaceholderText(
+      "Insira os nomes dos participantes"
+    )
 
-  const botao = screen.getByRole("button", { name: "Adicionar" })
+    const botao = screen.getByRole("button", { name: "Adicionar" })
 
-  expect(input).toBeInTheDocument()
+    expect(input).toBeInTheDocument()
 
-  expect(botao).toBeDisabled()
-})
-
-//teste 2
-test("adicionar um participante caso exista um nome preenchido", () => {
-  render(
-    <BrowserRouter>
-      <GameStart />
-    </BrowserRouter>
-  )
-  //encontrar no DOM o input
-  const input = screen.getByPlaceholderText("Insira os nomes dos participantes")
-  //encontrar o botão
-  const botao = screen.getByRole("button", { name: "Adicionar" })
-
-  //inserir o valor no input
-  fireEvent.change(input, {
-    target: {
-      value: "a",
-    },
+    expect(botao).toBeDisabled()
   })
 
-  //clicar no botão de submeter
-  fireEvent.click(botao)
+  //teste 2
+  test("adicionar um participante caso exista um nome preenchido", () => {
+    render(
+      <BrowserRouter>
+        <GameStart />
+      </BrowserRouter>
+    )
+    //encontrar no DOM o input
+    const input = screen.getByPlaceholderText(
+      "Insira os nomes dos participantes"
+    )
+    //encontrar o botão
+    const botao = screen.getByRole("button", { name: "Adicionar" })
 
-  //garantir que o input esteja com o foco ativo
-  expect(input).toHaveFocus()
+    //inserir o valor no input
+    fireEvent.change(input, {
+      target: {
+        value: "a",
+      },
+    })
 
-  //garantir que o input não tenha um valor
-  expect(input).toHaveValue("")
-})
+    //clicar no botão de submeter
+    fireEvent.click(botao)
 
-//teste 3
-test("nomes duplicados não podem ser adicionados na lista", () => {
-  render(
-    <BrowserRouter>
-      <GameStart />
-    </BrowserRouter>
-  )
-  //encontrar no DOM o input
-  const input = screen.getByPlaceholderText("Insira os nomes dos participantes")
-  //encontrar o botão
-  const botao = screen.getByRole("button", { name: "Adicionar" })
+    //garantir que o input esteja com o foco ativo
+    expect(input).toHaveFocus()
 
-  //inserir o valor no input
-  fireEvent.change(input, {
-    target: {
-      value: "a",
-    },
+    //garantir que o input não tenha um valor
+    expect(input).toHaveValue("")
   })
-  //clicar no botão de submeter
-  fireEvent.click(botao)
 
-  //inserir o valor no input
-  fireEvent.change(input, {
-    target: {
-      value: "a",
-    },
+  //teste 3
+  test("nomes duplicados não podem ser adicionados na lista", () => {
+    render(
+      <BrowserRouter>
+        <GameStart />
+      </BrowserRouter>
+    )
+    //encontrar no DOM o input
+    const input = screen.getByPlaceholderText(
+      "Insira os nomes dos participantes"
+    )
+    //encontrar o botão
+    const botao = screen.getByRole("button", { name: "Adicionar" })
+
+    //inserir o valor no input
+    fireEvent.change(input, {
+      target: {
+        value: "a",
+      },
+    })
+    //clicar no botão de submeter
+    fireEvent.click(botao)
+
+    //inserir o valor no input
+    fireEvent.change(input, {
+      target: {
+        value: "a",
+      },
+    })
+    //clicar no botão de submeter
+    fireEvent.click(botao)
+
+    //mensagem de erro
+    const errorMessage = screen.getByRole("alert")
+
+    expect(errorMessage.textContent).toBe("Nome já existe!")
   })
-  //clicar no botão de submeter
-  fireEvent.click(botao)
 
-  //mensagem de erro
-  const errorMessage = screen.getByRole("alert")
+  //teste 4
+  test("a mensagem de erro deve sumir após os timers", () => {
+    jest.useFakeTimers()
+    render(
+      <BrowserRouter>
+        <GameStart />
+      </BrowserRouter>
+    )
+    //encontrar no DOM o input
+    const input = screen.getByPlaceholderText(
+      "Insira os nomes dos participantes"
+    )
+    //encontrar o botão
+    const botao = screen.getByRole("button", { name: "Adicionar" })
 
-  expect(errorMessage.textContent).toBe("Nome já existe!")
-})
+    //inserir o valor no input
+    fireEvent.change(input, {
+      target: {
+        value: "a",
+      },
+    })
+    //clicar no botão de submeter
+    fireEvent.click(botao)
 
-//teste 4
-test("a mensagem de erro deve sumir após os timers", () => {
-  render(
-    <BrowserRouter>
-      <GameStart />
-    </BrowserRouter>
-  )
-  //encontrar no DOM o input
-  const input = screen.getByPlaceholderText("Insira os nomes dos participantes")
-  //encontrar o botão
-  const botao = screen.getByRole("button", { name: "Adicionar" })
+    //inserir o valor no input
+    fireEvent.change(input, {
+      target: {
+        value: "a",
+      },
+    })
+    //clicar no botão de submeter
+    fireEvent.click(botao)
 
-  //inserir o valor no input
-  fireEvent.change(input, {
-    target: {
-      value: "a",
-    },
+    //mensagem de erro
+    let errorMessage = screen.queryByRole("alert")
+    expect(errorMessage).toBeInTheDocument()
+
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    errorMessage = screen.queryByRole("alert")
+    expect(errorMessage).toBeNull()
   })
-  //clicar no botão de submeter
-  fireEvent.click(botao)
-
-  //inserir o valor no input
-  fireEvent.change(input, {
-    target: {
-      value: "a",
-    },
-  })
-  //clicar no botão de submeter
-  fireEvent.click(botao)
-
-  //mensagem de erro
-  let errorMessage = screen.queryByRole("alert")
-
-  expect(errorMessage).toBeInTheDocument()
-
-  errorMessage = screen.queryByRole("alert")
-  expect(errorMessage).toBeNull()
 })

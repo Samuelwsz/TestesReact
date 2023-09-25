@@ -6,16 +6,23 @@ import { Link } from "react-router-dom"
 export default function GameStart() {
   const [name, setName] = useState<string>("")
   const [nameList, setNameList] = useState<string[]>([])
+  const [error, setError] = useState<string>("")
 
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleAddName = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (name && !nameList.includes(name)) {
-      setNameList([...nameList, name])
-      setName("")
-      inputRef.current?.focus()
+    {
+      if (name && !nameList.includes(name)) {
+        setNameList([...nameList, name])
+        setError("")
+      } else {
+        setError("Nome já existe!") // Define o erro apenas se o nome já existe na lista
+      }
     }
+    setName("")
+
+    inputRef.current?.focus()
   }
 
   return (
@@ -52,6 +59,7 @@ export default function GameStart() {
           </div>
 
           <div className="pt-10 text-center font-semibold">
+            {error && <p role="alert">{error}</p>}
             <ul>
               {nameList.map((n, index) => (
                 <li key={index}>{n}</li>

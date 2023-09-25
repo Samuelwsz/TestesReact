@@ -136,3 +136,54 @@ describe("comportamento do formulario", () => {
     expect(errorMessage).toBeNull()
   })
 })
+
+//teste 5
+test("comportamento do botao iniciar a brincadeira", () => {
+  render(
+    <BrowserRouter>
+      <GameStart />
+    </BrowserRouter>
+  )
+
+  const botao = screen.getByRole("button", {
+    name: "Iniciar brincadeira!",
+  })
+
+  expect(botao).toBeInTheDocument()
+  expect(botao).toBeDisabled()
+})
+
+//teste 6
+test("comportamento do botao habilitado", () => {
+  render(
+    <BrowserRouter>
+      <GameStart />
+    </BrowserRouter>
+  )
+
+  const botao = screen.getByRole("button", {
+    name: "Iniciar brincadeira!",
+  })
+
+  expect(botao).toBeInTheDocument()
+
+  const input = screen.getByPlaceholderText("Insira os nomes dos participantes")
+
+  // Simule a entrada de nomes e o envio do formulário
+  fireEvent.change(input, { target: { value: "a" } })
+  fireEvent.submit(screen.getByRole("form"))
+
+  fireEvent.change(input, { target: { value: "aa" } })
+  fireEvent.submit(screen.getByRole("form"))
+
+  fireEvent.change(input, { target: { value: "aaa" } })
+  fireEvent.submit(screen.getByRole("form"))
+
+  // Verifique se o botão agora está habilitado
+  expect(botao).not.toBeDisabled()
+
+  fireEvent.click(botao)
+
+  // Verifique se a navegação ocorreu para "/sorteio"
+  expect(window.location.pathname).toBe("/sorteio")
+})

@@ -37,7 +37,7 @@ export default function GameStart() {
           </h1>
 
           <div className="flex justify-center pt-10">
-            <form className="flex" onSubmit={handleAddName}>
+            <form role="form" className="flex" onSubmit={handleAddName}>
               <div className="relative flex items-stretch w-full ">
                 <span className="flex items-center justify-center absolute inset-y-0 left-0 pl-6">
                   <UserPlusIcon className="w-5 h-5 text-gray-400 " />
@@ -73,7 +73,12 @@ export default function GameStart() {
 
           <Link to="/sorteio">
             <div className="flex gap-16 justify-center flex-col items-center md:flex-row md:items-center mt-20">
-              <button className="flex bg-orange-500 p-4 pl-10 pr-12 rounded-full text-white font-bold text-lg border border-r-4 border-b-4 border-black">
+              <button
+                disabled={nameList.length < 3}
+                className={`flex bg-orange-500 p-4 pl-10 pr-12 rounded-full text-white font-bold text-lg border border-r-4 border-b-4 border-black ${
+                  nameList.length < 3 ? "bg-opacity-20" : ""
+                }`}
+              >
                 <PlayCircleIcon className="w-8 h-8 pr-2" />
                 Iniciar brincadeira!
               </button>

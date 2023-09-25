@@ -2,7 +2,7 @@ interface NameListProps {
   nameList: string[]
 }
 
-function NameList({ nameList }: NameListProps) {
+export default function NameList({ nameList }: NameListProps) {
   return (
     <ul>
       {nameList.map((n) => (
@@ -11,5 +11,3 @@ function NameList({ nameList }: NameListProps) {
     </ul>
   )
 }
-
-export default NameList

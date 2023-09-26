@@ -11,9 +11,20 @@ export default function Draw() {
   const [selectOption, setSelectOption] = useState<string | undefined>(
     undefined
   )
+  const [drawName, setDrawName] = useState<string | undefined>(undefined)
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectOption(event.target.value)
+  }
+
+  const handleDrawClick = () => {
+    const filteredList = nameListArray.filter((name) => name !== selectOption)
+
+    const randomIndex = Math.floor(Math.random() * filteredList.length)
+
+    const randomName = filteredList[randomIndex]
+
+    setDrawName(randomName)
   }
   return (
     <>
@@ -32,18 +43,14 @@ export default function Draw() {
                 onChange={handleSelectChange}
                 className="p-3 rounded-full w-48 md:w-96 lg:w-96 outline-none mb-3 border border-r-4 border-b-4 border-black "
               >
+                <option value="">Selecione seu nome</option>
                 {nameListArray.map((name) => (
-                  <option key={name} value={name}>
+                  <option role="option" key={name} value={name}>
                     {name}
                   </option>
                 ))}
               </select>
-              {/*mostar aqui a opção que foi selecionada*/}
-              {selectOption && (
-                <p className="pt-3 font-semibold text-xl">
-                  Opção selecionada: {selectOption}
-                </p>
-              )}
+
               <p className="pt-3 font-semibold text-xl">
                 Clique em em sortear para ver quem é seu amigo secreto!
               </p>
@@ -51,10 +58,18 @@ export default function Draw() {
           </div>
 
           <div className="flex justify-center flex-col items-center mt-16">
-            <button className="flex bg-orange-500 p-4 pl-10 pr-12 rounded-full text-white font-bold text-lg border border-r-4 border-b-4 border-black mb-8">
+            <button
+              disabled={!selectOption}
+              onClick={handleDrawClick}
+              className={`flex bg-orange-500 p-4 pl-10 pr-12 rounded-full text-white font-bold text-lg border border-r-4 border-b-4 border-black mb-8 ${
+                !selectOption ? "bg-opacity-20" : ""
+              }`}
+            >
               <Squares2X2Icon className="w-8 h-8 pr-2" />
               Sortear!
             </button>
+            {/*aqui vai o sorteado*/}
+            {drawName && <p className="font-semibold text-xl">{drawName}</p>}
             <img src={aviao} alt="" className="w-40 h-32" />
           </div>
         </div>

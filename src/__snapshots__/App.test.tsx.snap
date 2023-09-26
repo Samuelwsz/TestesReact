@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`a pagina de configuração deve ser renderizado corretamente 1`] = `
+<div>
+  <div
+    class="bg-blue-500 pt-12"
+  >
+    <div
+      class="flex gap-3 justify-center flex-col items-center md:flex-row md:items-center"
+    >
+      <img
+        alt=""
+        class="w-96 h-40 md:block hidden"
+        src="test-file-stub"
+      />
+      <img
+        alt=""
+        class="w-72 h-60 md:hidden block"
+        src="test-file-stub"
+      />
+      <img
+        alt=""
+        class="md:mt-0 mt-4 w-96 h-80 "
+        src="test-file-stub"
+      />
+    </div>
+  </div>
+</div>
+`;

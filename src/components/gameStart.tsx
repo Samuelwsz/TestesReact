@@ -71,7 +71,7 @@ export default function GameStart() {
             </ul>*/}
           </div>
 
-          <Link to="/sorteio">
+          <Link to={`/sorteio/${nameList.join(",")}`}>
             <div className="flex gap-16 justify-center flex-col items-center md:flex-row md:items-center mt-20">
               <button
                 disabled={nameList.length < 3}

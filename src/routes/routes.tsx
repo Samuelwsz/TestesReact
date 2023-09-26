@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
         element: <GameStart />,
       },
       {
-        path: "/sorteio",
+        path: "/sorteio/:nameList",
         element: <Draw />,
       },
     ],

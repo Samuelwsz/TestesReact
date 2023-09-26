@@ -1,7 +1,20 @@
 import { Squares2X2Icon } from "@heroicons/react/20/solid"
 import aviao from "/assets/aviao.png"
+import { useParams } from "react-router-dom"
+import { ChangeEvent, useState } from "react"
 
 export default function Draw() {
+  const { nameList } = useParams<{ nameList?: string }>()
+  // Split the comma-separated string into an array
+  const nameListArray = nameList ? nameList.split(",") : []
+
+  const [selectOption, setSelectOption] = useState<string | undefined>(
+    undefined
+  )
+
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSelectOption(event.target.value)
+  }
   return (
     <>
       <div className="bg-orange-100 flex flex-col pb-32">
@@ -15,8 +28,22 @@ export default function Draw() {
               <select
                 name=""
                 id=""
+                value={selectOption || ""}
+                onChange={handleSelectChange}
                 className="p-3 rounded-full w-48 md:w-96 lg:w-96 outline-none mb-3 border border-r-4 border-b-4 border-black "
-              ></select>
+              >
+                {nameListArray.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              {/*mostar aqui a opção que foi selecionada*/}
+              {selectOption && (
+                <p className="pt-3 font-semibold text-xl">
+                  Opção selecionada: {selectOption}
+                </p>
+              )}
               <p className="pt-3 font-semibold text-xl">
                 Clique em em sortear para ver quem é seu amigo secreto!
               </p>

@@ -37,13 +37,15 @@ export default function Draw() {
           <div className="pt-10">
             <div className="flex flex-col items-center justify-center w-full ">
               <select
-                name=""
-                id=""
+                placeholder="Selecione o seu nome"
                 value={selectOption || ""}
                 onChange={handleSelectChange}
                 className="p-3 rounded-full w-48 md:w-96 lg:w-96 outline-none mb-3 border border-r-4 border-b-4 border-black "
+                data-testid="select-element"
               >
-                <option value="">Selecione seu nome</option>
+                <option hidden value="">
+                  Selecione seu nome
+                </option>
                 {nameListArray.map((name) => (
                   <option role="option" key={name} value={name}>
                     {name}
@@ -69,7 +71,12 @@ export default function Draw() {
               Sortear!
             </button>
             {/*aqui vai o sorteado*/}
-            {drawName && <p className="font-semibold text-xl">{drawName}</p>}
+            <div data-testid="sorteado" role="alert">
+              {drawName && (
+                <p className="font-semibold text-2xl mb-5">{drawName}</p>
+              )}
+            </div>
+
             <img src={aviao} alt="" className="w-40 h-32" />
           </div>
         </div>

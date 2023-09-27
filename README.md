@@ -21,3 +21,8 @@ serviço - testa o componente completo
 
 unidade - teste rapido de ser feito e barato
 o proprio desenvolvedor realiza o teste
+
+
+### Projeto finalizado
+
+[Link](https://testes-react-jet.vercel.app/)
